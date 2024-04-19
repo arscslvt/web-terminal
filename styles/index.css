@@ -314,7 +314,8 @@
 
   background-color: var(--text);
 
-  animation: blink 2s steps(1) infinite;
+  animation: blink 1s steps(1) infinite;
+  padding-top: 1.5px;
 }
 
 @keyframes blink {
@@ -337,16 +338,6 @@
   pointer-events: none;
   user-select: none;
 }
-
-/* .command-row::after {
-  content: "arscslvt@web: $ ";
-  white-space: nowrap;
-  color: var(--accent);
-  margin-right: 0.5rem;
-
-  pointer-events: none;
-  user-select: none;
-} */
 
 .command-row input {
   height: 100%;
