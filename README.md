@@ -1,5 +1,7 @@
 # Web Terminal (Preview) — Only HTML & CSS
-Welcome to the Web Terminal (preview only) project!
+👋 Welcome to the Web Terminal project!
+
+📖 View the [Wiki](https://github.com/arscslvt/web-terminal/wiki) to find out more details.
 
 ![Web Terminal](https://github.com/arscslvt/web-terminal/assets/57394934/8f4fc294-d32f-4e60-b801-ae00eb94ffd2)
 
