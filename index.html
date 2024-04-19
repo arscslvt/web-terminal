@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Terminal</title>
+    <link rel="stylesheet" href="styles/index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="container-alert">
+        <p>Click anywhere to show the terminal_</p>
+      </div>
+
+      <div class="terminal">
+        <div class="window-controls">
+          <div class="window-buttons">
+            <button class="button close">
+              <img
+                src="assets/icons/controls/win-close.png"
+                alt="Close window"
+              />
+            </button>
+            <div role="button" class="button-checkbox" id="minimize-button">
+              <input
+                type="checkbox"
+                class="minimize-cb"
+                name="minimize-window"
+                id="minimize-window"
+              />
+              <img
+                src="assets/icons/controls/win-minimize.png"
+                alt="Minimize window"
+              />
+            </div>
+            <div role="button" class="button-checkbox" id="maximize-button">
+              <input
+                type="checkbox"
+                class="maximize-cb"
+                name="maximize-window"
+                id="maximize-window"
+              />
+              <img
+                src="assets/icons/controls/win-full.png"
+                alt="Maximize window"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <span>Welcome on web-term, Salvatore.</span>
+
+          <div>
+            <p class="muted">Last login: Thu Apr 18 12:52:46 on ttys001</p>
+          </div>
+        </div>
+        <div class="editable" contenteditable="true">
+          <div class="command-row"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
