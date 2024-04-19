@@ -21,7 +21,6 @@ View the live demo [here](https://webterm.salvatorearesco.com).
 ## Technologies Used
 - HTML
 - CSS
-- Credits
 
 This project was created by [Salvatore Aresco](https://github.com/arscslvt) (me).
 
