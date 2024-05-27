@@ -11,15 +11,17 @@ const updateTime = () => {
   const timeHTML = document.querySelectorAll(".display-time");
   const timeStr = time.getClockTime();
 
+  timeHTML.forEach((el) => {
+    el.textContent = timeStr;
+  });
+
   const lastSessionHTML = document.querySelector("#last-session");
+
+  if (!lastSession) return (lastSessionHTML.textContent = "now");
   const lastSessionTime = new Date(parseInt(lastSession));
   const lastSessionStr = time.formatDate(lastSessionTime);
 
   lastSessionHTML.textContent = lastSessionStr;
-
-  timeHTML.forEach((el) => {
-    el.textContent = timeStr;
-  });
 };
 
 document.addEventListener("DOMContentLoaded", () => {

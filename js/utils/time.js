@@ -51,7 +51,7 @@ const formatDate = (date) => {
   const minutes = date.getMinutes();
   const seconds = date.getSeconds();
 
-  return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+  return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
 };
 
 export default {
