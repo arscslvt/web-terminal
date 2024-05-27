@@ -3,6 +3,8 @@ import commands from "../utils/commands.js";
 const commandsList = document.querySelector("#commands-list");
 const commandInput = document.querySelector("#command-input");
 
+const terminalHTML = document.querySelector("#terminal");
+
 const sent_commands = [];
 let current_command = 0;
 
@@ -93,7 +95,7 @@ const handleAddCommand = (command, type = "user") => {
 
   const commandsListLastChild = commandsList.lastChild;
 
-  commandsList.insertBefore(commandRow, commandsListLastChild);
+  commandsList.appendChild(commandRow);
 
   commandInput.innerHTML = "";
   commandInput.focus();
@@ -115,4 +117,6 @@ commandInput.addEventListener("keypress", async (e) => {
       handleAddCommand(response, "system");
     }
   }
+
+  terminalHTML.scrollTop = terminalHTML.scrollHeight;
 });
