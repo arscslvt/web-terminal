@@ -6,6 +6,17 @@ import "./command-handler.js";
 window.logger = logger;
 
 const lastSession = localStorage.getItem("lastSession");
+const fileSystem =
+  localStorage.getItem("fileSystem") ||
+  localStorage.setItem(
+    "fileSystem",
+    JSON.stringify({
+      root: {},
+    })
+  );
+
+window.fileSystem = JSON.parse(fileSystem);
+window.currentDir = "root";
 
 const updateTime = () => {
   const timeHTML = document.querySelectorAll(".display-time");

@@ -322,7 +322,7 @@
   display: flex;
 }
 
-.command-row:nth-last-child(1) {
+.blink-caret:nth-last-child(1) {
   caret-color: transparent;
 }
 

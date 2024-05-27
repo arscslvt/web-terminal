@@ -93,8 +93,6 @@ const handleAddCommand = (command, type = "user") => {
       break;
   }
 
-  const commandsListLastChild = commandsList.lastChild;
-
   commandsList.appendChild(commandRow);
 
   commandInput.innerHTML = "";
@@ -120,3 +118,16 @@ commandInput.addEventListener("keypress", async (e) => {
 
   terminalHTML.scrollTop = terminalHTML.scrollHeight;
 });
+
+const handlePasteEvent = (e) => {
+  e.preventDefault();
+
+  // Get the text data from the clipboard or drag event
+  const text = (e.clipboardData || e.dataTransfer).getData("text");
+
+  // Insert the plain text into the contenteditable div
+  document.execCommand("insertText", false, text);
+};
+
+commandInput.addEventListener("paste", handlePasteEvent);
+commandInput.addEventListener("drop", handlePasteEvent);

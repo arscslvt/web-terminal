@@ -7,6 +7,7 @@ import {
 
 import { curl } from "../commands/fetcher.js";
 import logger from "./logger.js";
+import { cmd_cd, cmd_ls, cmd_mkdir } from "./file-system.js";
 
 /**
  * @constant commands
@@ -32,6 +33,22 @@ const commands = {
     description: "Run a command as the superuser",
     usage: "sudo [command]",
     fn: cmd_sudo,
+  },
+
+  cd: {
+    description: "Change the current directory",
+    usage: "cd [path]",
+    fn: cmd_cd,
+  },
+  ls: {
+    description: "List all files in the current directory",
+    usage: "ls",
+    fn: cmd_ls,
+  },
+  mkdir: {
+    description: "Create a new directory",
+    usage: "mkdir [path]",
+    fn: cmd_mkdir,
   },
 
   curl: {
