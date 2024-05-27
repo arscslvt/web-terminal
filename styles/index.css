@@ -92,7 +92,7 @@
   overflow: hidden;
   resize: both;
 
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
 
   z-index: 30;
 
@@ -253,7 +253,7 @@
 
 .toolbar {
   font-size: 12px;
-  padding-bottom: 2rem;
+  padding-bottom: 1.5rem;
   font-weight: 400;
 
   display: flex;
@@ -276,23 +276,28 @@
   height: 100%;
   width: 100%;
 
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .editable {
   outline: none;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 
-.editable::-webkit-scrollbar {
+.commands-view::-webkit-scrollbar {
   background-color: var(--background);
   width: 0.2rem;
 }
 
-.editable::-webkit-scrollbar-thumb {
+.commands-view::-webkit-scrollbar-thumb {
   background-color: var(--accent);
 
   border-radius: 0.2rem;
+}
+
+.commands-list {
+  user-select: auto;
 }
 
 .command-row {
@@ -333,6 +338,10 @@
   padding-top: 1.5px;
 }
 
+.word-break {
+  word-break: break-all !important;
+}
+
 @keyframes blink {
   0% {
     opacity: 1;
@@ -354,7 +363,7 @@
   user-select: none;
 }
 .system-command::before {
-  content: "[console]: ";
+  content: "web-terminal: ";
   white-space: nowrap;
   margin-right: 0.5rem;
 
@@ -364,7 +373,7 @@
   user-select: none;
 }
 
-.command-row input {
+.lirow input {
   height: 100%;
   width: 100%;
 

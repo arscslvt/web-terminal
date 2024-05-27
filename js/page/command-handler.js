@@ -23,8 +23,6 @@ commandInput.addEventListener("focus", () => {
  * @param {string} type The type of command to add (user or system)
  */
 const handleAddCommand = (command, type = "user") => {
-  logger("Command entered: " + command, "info");
-
   const commandRow = document.createElement("div");
   commandRow.classList.add(
     "command-row",
@@ -56,12 +54,12 @@ const handleAddCommand = (command, type = "user") => {
   commandInput.focus();
 };
 
-commandInput.addEventListener("keypress", (e) => {
+commandInput.addEventListener("keypress", async (e) => {
   if (e.key === "Enter") {
     const command = e.target.innerText.trim();
     handleAddCommand(command);
 
-    const response = commands.invokeCommand(command, null);
+    const response = await commands.invokeCommand(command, null);
 
     if (response) {
       handleAddCommand(response, "system");

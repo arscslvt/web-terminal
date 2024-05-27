@@ -4,6 +4,8 @@ import {
   cmd_help,
   cmd_sudo,
 } from "../commands/generic.js";
+
+import { curl } from "../commands/fetcher.js";
 import logger from "./logger.js";
 
 /**
@@ -13,7 +15,7 @@ import logger from "./logger.js";
 const commands = {
   help: {
     description: "List all available commands",
-    usage: "help",
+    usage: "help | help [command]",
     fn: cmd_help,
   },
   clear: {
@@ -31,6 +33,13 @@ const commands = {
     usage: "sudo [command]",
     fn: cmd_sudo,
   },
+
+  curl: {
+    description: "Transfer data from or to a server",
+    usage: "curl [url]",
+    isAsync: true,
+    fn: curl,
+  },
 };
 
 /**
@@ -42,8 +51,16 @@ const commands = {
  *
  * @returns {string} The response from the command
  */
-const invokeCommand = (command, args) => {
-  const [commandName, ...commandArgs] = command.split(" ");
+const invokeCommand = async (command, args) => {
+  const [providedCommandName, ...commandArgs] = command.trim().split(/\s+/, 10);
+
+  const commandName = providedCommandName.toLocaleLowerCase();
+
+  if (commandName.includes(" ")) {
+    return "Command name cannot contain spaces.";
+  }
+
+  console.log(`Command: ${commandName}\nArgs: ${commandArgs}`);
 
   if (!commands[commandName]) {
     logger(`Command not found: ${command}`);
@@ -52,7 +69,13 @@ const invokeCommand = (command, args) => {
 
   logger(`Invoking command: ${commandName}\nArgs: ${commandArgs}`, "info");
 
-  const response = commands[commandName].fn(commandArgs);
+  let response;
+
+  if (commands[commandName].isAsync) {
+    console.log("Fn is async");
+    response = await commands[commandName].fn(commandArgs);
+  } else response = commands[commandName].fn(commandArgs);
+
   return response;
 };
 
