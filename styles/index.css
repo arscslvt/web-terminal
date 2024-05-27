@@ -398,4 +398,8 @@
   #maximize-button {
     display: none;
   }
+
+  .command-row {
+    font-size: 16px !important;
+  }
 }
