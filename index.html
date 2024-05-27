@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="styles/index.css" />
   </head>
   <body>
+    <!-- MODULES -->
+    <!-- <script type="module" src="js/utils/time.js"></script> -->
+    <!-- SCRIPTS & LOADERS -->
+
     <div class="container">
       <div class="container-alert">
         <p>Click anywhere to show the terminal_</p>
@@ -46,6 +50,10 @@
               />
             </div>
           </div>
+
+          <div>
+            <span class="display-time muted"></span>
+          </div>
         </div>
 
         <div class="toolbar">
@@ -55,10 +63,19 @@
             <p class="muted">Last login: Thu Apr 19 12:52:46 on ttys001</p>
           </div>
         </div>
-        <div class="editable" contenteditable="true">
-          <div class="command-row"></div>
+        <div class="commands-view">
+          <div class="editable" id="commands-list">
+            <!-- <div class="command-row command-item blink-caret"></div> -->
+          </div>
+          <div
+            class="command-row user-command blink-caret"
+            id="command-input"
+            contenteditable="true"
+          ></div>
         </div>
       </div>
     </div>
+
+    <script type="module" src="js/page/init.js" defer></script>
   </body>
 </html>
