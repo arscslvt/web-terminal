@@ -3,6 +3,9 @@ import commands from "../utils/commands.js";
 const commandsList = document.querySelector("#commands-list");
 const commandInput = document.querySelector("#command-input");
 
+const sent_commands = [];
+let current_command = 0;
+
 document.addEventListener("DOMContentLoaded", () => {
   commandInput.focus();
 });
@@ -15,6 +18,48 @@ commandInput.addEventListener("focus", () => {
   commandInput.classList.add("blink-caret");
 });
 
+commandInput.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowUp") {
+    e.preventDefault();
+
+    if (sent_commands.length <= 0) return;
+
+    current_command = current_command - 1 < 0 ? 0 : current_command - 1;
+
+    commandInput.innerText = sent_commands[current_command];
+
+    const range = document.createRange();
+    const sel = window.getSelection();
+    range.setStart(commandInput.childNodes[0], commandInput.innerText.length);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+
+    return;
+  }
+
+  if (e.key === "ArrowDown") {
+    e.preventDefault();
+
+    if (sent_commands.length <= 0) return;
+
+    current_command =
+      current_command + 1 > sent_commands.length - 1
+        ? sent_commands.length - 1
+        : current_command + 1;
+
+    commandInput.innerText = sent_commands[current_command];
+
+    const range = document.createRange();
+    const sel = window.getSelection();
+    range.setStart(commandInput.childNodes[0], commandInput.innerText.length);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+
+    return;
+  }
+});
 /**
  * @function handleAddCommand
  * @description Handles the addition of a new command
@@ -52,6 +97,11 @@ const handleAddCommand = (command, type = "user") => {
 
   commandInput.innerHTML = "";
   commandInput.focus();
+
+  if (type === "user") {
+    sent_commands.push(command);
+    current_command = sent_commands.length;
+  }
 };
 
 commandInput.addEventListener("keypress", async (e) => {
