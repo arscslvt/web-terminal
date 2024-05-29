@@ -69,6 +69,7 @@
 .terminal {
   background-color: var(--background-opaque);
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   color: var(--text);
   font-family: "Roboto Mono", monospace;
   font-size: 14px;
