@@ -1,7 +1,5 @@
 import commands from "../utils/commands.js";
 
-const commandsList = document.querySelector("#commands-list");
-
 const cmd_help = (args) => {
   if (args.length <= 0) {
     const temp_commands = Object.keys(commands.commands).map((command) => {
@@ -43,6 +41,8 @@ const cmd_echo = (args) => {
 };
 
 const cmd_clear = (args) => {
+  const commandsList = document.querySelector("#commands-list");
+
   commandsList.innerHTML = "";
   return "";
 };

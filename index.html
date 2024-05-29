@@ -11,73 +11,11 @@
     <!-- <script type="module" src="js/utils/time.js"></script> -->
     <!-- SCRIPTS & LOADERS -->
 
-    <div class="container">
+    <div class="container" id="container">
       <div class="container-alert">
         <p>Click anywhere to show the terminal_</p>
       </div>
-
-      <div class="terminal" id="terminal">
-        <div class="window-controls">
-          <div class="window-buttons">
-            <button class="button close">
-              <img
-                src="assets/icons/controls/win-close.png"
-                alt="Close window"
-              />
-            </button>
-            <div role="button" class="button-checkbox" id="minimize-button">
-              <input
-                type="checkbox"
-                class="minimize-cb"
-                name="minimize-window"
-                id="minimize-window"
-              />
-              <img
-                src="assets/icons/controls/win-minimize.png"
-                alt="Minimize window"
-              />
-            </div>
-            <div role="button" class="button-checkbox" id="maximize-button">
-              <input
-                type="checkbox"
-                class="maximize-cb"
-                name="maximize-window"
-                id="maximize-window"
-              />
-              <img
-                src="assets/icons/controls/win-full.png"
-                alt="Maximize window"
-              />
-            </div>
-          </div>
-
-          <div>
-            <span class="display-time muted"></span>
-          </div>
-        </div>
-
-        <div class="toolbar">
-          <span>Welcome back, arscslvt.</span>
-
-          <div>
-            <p class="muted">
-              Last login: <span id="last-session"></span> on ttys001
-            </p>
-          </div>
-        </div>
-        <div class="commands-view">
-          <div class="editable" id="commands-list">
-            <!-- <div class="command-row command-item blink-caret"></div> -->
-          </div>
-          <div
-            class="command-row user-command"
-            id="command-input"
-            contenteditable="true"
-          ></div>
-        </div>
-      </div>
     </div>
-
-    <script type="module" src="js/page/init.js" defer></script>
+    <script type="module" src="js/page/init.js" de></script>
   </body>
 </html>

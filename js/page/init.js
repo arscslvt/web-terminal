@@ -1,7 +1,8 @@
 import time from "../utils/time.js";
 import logger from "../utils/logger.js";
 
-import "./command-handler.js";
+import "../page/window.js";
+import "../utils/commands.js";
 
 window.logger = logger;
 
@@ -36,13 +37,15 @@ const updateTime = () => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  logger("Page loaded succesfully.", "info");
-
   localStorage.setItem("lastSession", new Date().getTime());
 
   const refreshTime = setInterval(() => {
+    const isTerminalRendered = document.querySelector("#terminal");
+
+    if (!isTerminalRendered) {
+      clearInterval(refreshTime);
+      return;
+    }
     updateTime();
   }, 500);
 });
-
-const commandsList = document.querySelector("#commands-list");

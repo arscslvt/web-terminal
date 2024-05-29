@@ -77,8 +77,6 @@ const invokeCommand = async (command, args) => {
     return "Command name cannot contain spaces.";
   }
 
-  console.log(`Command: ${commandName}\nArgs: ${commandArgs}`);
-
   if (!commands[commandName]) {
     logger(`Command not found: ${command}`);
     return `'${commandName}' is not a valid command. Type 'help' to see all available commands.`;
@@ -95,6 +93,8 @@ const invokeCommand = async (command, args) => {
 
   return response;
 };
+
+window.invokeCommand = invokeCommand;
 
 export default {
   commands,

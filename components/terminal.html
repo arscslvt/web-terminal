@@ -1,0 +1,57 @@
+<div class="terminal" id="terminal">
+  <div class="window-controls">
+    <div class="window-buttons">
+      <button class="button close" id="close-terminal">
+        <img src="assets/icons/controls/win-close.png" alt="Close window" />
+      </button>
+      <div role="button" class="button-checkbox" id="minimize-terminal">
+        <input
+          type="checkbox"
+          class="minimize-cb"
+          name="minimize-window"
+          id="minimize-window"
+        />
+        <img
+          src="assets/icons/controls/win-minimize.png"
+          alt="Minimize window"
+        />
+      </div>
+      <div role="button" class="button-checkbox" id="maximize-terminal">
+        <input
+          type="checkbox"
+          class="maximize-cb"
+          name="maximize-window"
+          id="maximize-window"
+        />
+        <img src="assets/icons/controls/win-full.png" alt="Maximize window" />
+      </div>
+    </div>
+
+    <div>
+      <span class="display-time muted"></span>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <span>Welcome back, arscslvt.</span>
+
+    <div>
+      <p class="muted">
+        Last login: <span id="last-session"></span> on ttys001
+      </p>
+    </div>
+  </div>
+  <div class="commands-view">
+    <div class="editable" id="commands-list">
+      <!-- <div class="command-row command-item blink-caret"></div> -->
+    </div>
+    <div
+      class="command-row user-command"
+      id="command-input"
+      contenteditable="true"
+    ></div>
+  </div>
+</div>
+
+<script src="../js/page/command-handler.js" title="terminal-script"></script>
+<script src="../js/components/terminal/handler.js" defer></script>

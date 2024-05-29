@@ -1,5 +1,3 @@
-import commands from "../utils/commands.js";
-
 const commandsList = document.querySelector("#commands-list");
 const commandInput = document.querySelector("#command-input");
 
@@ -8,7 +6,10 @@ const terminalHTML = document.querySelector("#terminal");
 const sent_commands = [];
 let current_command = 0;
 
+commandInput.focus();
+
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("Terminal is ready");
   commandInput.focus();
 });
 
@@ -109,7 +110,7 @@ commandInput.addEventListener("keypress", async (e) => {
     const command = e.target.innerText.trim();
     handleAddCommand(command);
 
-    const response = await commands.invokeCommand(command, null);
+    const response = await window.invokeCommand(command);
 
     if (response) {
       handleAddCommand(response, "system");
