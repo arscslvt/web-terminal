@@ -1,7 +1,7 @@
-const commandsList = document.querySelector("#commands-list");
-const commandInput = document.querySelector("#command-input");
+const commandsList = document.querySelector("#commands-list-[COMPONENT_ID]");
+const commandInput = document.querySelector("#command-input-[COMPONENT_ID]");
 
-const terminalHTML = document.querySelector("#terminal");
+const terminalHTML = document.querySelector("#terminal-[COMPONENT_ID]");
 
 const sent_commands = [];
 let current_command = 0;

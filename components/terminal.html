@@ -1,27 +1,35 @@
-<div class="terminal" id="terminal">
-  <div class="window-controls">
+<div class="terminal" id="terminal-[COMPONENT_ID]">
+  <div class="window-controls" id="window-controls-[COMPONENT_ID]">
     <div class="window-buttons">
-      <button class="button close" id="close-terminal">
+      <button class="button close" id="close-terminal-[COMPONENT_ID]">
         <img src="assets/icons/controls/win-close.png" alt="Close window" />
       </button>
-      <div role="button" class="button-checkbox" id="minimize-terminal">
+      <div
+        role="button"
+        class="button-checkbox"
+        id="minimize-terminal-[COMPONENT_ID]"
+      >
         <input
           type="checkbox"
           class="minimize-cb"
           name="minimize-window"
-          id="minimize-window"
+          id="minimize-window-[COMPONENT_ID]"
         />
         <img
           src="assets/icons/controls/win-minimize.png"
           alt="Minimize window"
         />
       </div>
-      <div role="button" class="button-checkbox" id="maximize-terminal">
+      <div
+        role="button"
+        class="button-checkbox"
+        id="maximize-terminal-[COMPONENT_ID]"
+      >
         <input
           type="checkbox"
           class="maximize-cb"
           name="maximize-window"
-          id="maximize-window"
+          id="maximize-window-[COMPONENT_ID]"
         />
         <img src="assets/icons/controls/win-full.png" alt="Maximize window" />
       </div>
@@ -37,21 +45,28 @@
 
     <div>
       <p class="muted">
-        Last login: <span id="last-session"></span> on ttys001
+        Last login: <span id="last-session-[COMPONENT_ID]"></span> on ttys001
       </p>
     </div>
   </div>
   <div class="commands-view">
-    <div class="editable" id="commands-list">
+    <div class="editable" id="commands-list-[COMPONENT_ID]">
       <!-- <div class="command-row command-item blink-caret"></div> -->
     </div>
     <div
       class="command-row user-command"
-      id="command-input"
+      id="command-input-[COMPONENT_ID]"
       contenteditable="true"
     ></div>
   </div>
 </div>
 
-<script src="../js/page/command-handler.js" title="terminal-script"></script>
-<script src="../js/components/terminal/handler.js" defer></script>
+<script
+  src="../js/page/command-handler.js"
+  title="terminal command handler"
+></script>
+<script
+  src="../js/components/terminal/handler.js"
+  defer
+  title="terminal window handler"
+></script>
