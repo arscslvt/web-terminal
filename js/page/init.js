@@ -3,6 +3,7 @@ import logger from "../utils/logger.js";
 
 import "../page/window.js";
 import "../utils/commands.js";
+import { switchTheme } from "../utils/theme-switcher.js";
 
 window.logger = logger;
 
@@ -18,6 +19,8 @@ const fileSystem =
 
 window.fileSystem = JSON.parse(fileSystem);
 window.currentDir = "root";
+
+const storedTheme = localStorage.getItem("theme");
 
 const updateTime = () => {
   const timeHTML = document.querySelectorAll(".display-time");
@@ -38,6 +41,10 @@ const updateTime = () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   localStorage.setItem("lastSession", new Date().getTime());
+
+  if (storedTheme) {
+    switchTheme(storedTheme);
+  }
 
   const refreshTime = setInterval(() => {
     const isTerminalRendered = document.querySelector("#terminal");

@@ -1,0 +1,81 @@
+.task-manager-viewport {
+  position: fixed;
+
+  bottom: 12px;
+  left: 0;
+
+  width: 100dvw;
+  height: 3rem;
+
+  padding: 0px 1rem 0.2rem;
+
+  display: flex;
+  justify-content: center;
+
+  z-index: 9999;
+
+  pointer-events: none;
+}
+
+.task-manager {
+  width: max-content;
+  height: 100%;
+  background: var(--background-opaque);
+  backdrop-filter: blur(10px);
+
+  border-radius: calc(var(--radius) + 0.5rem);
+
+  padding: 0rem 0.5rem;
+
+  box-shadow: inset 0px 2px 4px 0px rgba(255, 255, 255, 0.2);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  pointer-events: auto;
+}
+
+.task-manager-app {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  min-width: 2rem;
+
+  max-width: max-content;
+  height: 2rem;
+
+  background: transparent;
+  outline: none;
+
+  border: 0;
+  padding: 0.3rem;
+
+  cursor: pointer;
+  border-radius: var(--radius);
+
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.task-manager-app:hover {
+  background-color: var(--background-opaque);
+}
+
+.task-manager-app .task-manager-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+
+  user-select: none;
+  pointer-events: none;
+}
+
+.task-manager-app .task-manager-appName {
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+.task-manager-app.active .task-manager-icon {
+  box-shadow: 0px 1px 0px -0.1px var(--accent);
+}

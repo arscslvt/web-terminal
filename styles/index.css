@@ -1,23 +1,76 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 
-  --background: #18181b;
-  --background-opaque: rgba(24, 24, 27, 0.8);
-  --text: #f4f4f5;
-  --opaque: #d4d4d8;
-  --accent: #f97316;
-
   --radius: 0.3rem;
 
-  font-family: "Roboto Mono", monospace;
+  --font-mono: "Roboto Mono", monospace;
+  --font-sans: "Inter Tight", sans-serif;
+
+  font-family: var(--font-mono);
   color: var(--text);
 
   user-select: none;
   --webkit-user-select: none;
+}
+
+[data-theme="orange"] {
+  --background: hsl(240, 6%, 10%);
+  --background-opaque: hsla(240, 6%, 10%, 0.8);
+
+  --text: hsl(240, 5%, 96%);
+  --opaque: hsl(240, 5%, 84%);
+
+  --accent: hsl(25, 95%, 53%);
+  --accent-opaque: hsla(25, 95%, 53%, 0.3);
+}
+
+[data-theme="blue"] {
+  --background: hsl(220, 6%, 10%);
+  --background-opaque: hsla(220, 6%, 10%, 0.8);
+
+  --text: hsl(220, 5%, 96%);
+  --opaque: hsl(220, 5%, 84%);
+
+  --accent: hsl(222, 100%, 79%);
+  --accent-opaque: hsla(230, 95%, 53%, 0.3);
+}
+
+[data-theme="green"] {
+  --background: hsl(160, 6%, 10%);
+  --background-opaque: hsla(160, 6%, 10%, 0.8);
+
+  --text: hsl(160, 5%, 96%);
+  --opaque: hsl(160, 5%, 84%);
+
+  --accent: hsl(159, 95%, 53%);
+  --accent-opaque: hsla(159, 95%, 53%, 0.3);
+}
+
+[data-theme="purple"] {
+  --background: hsl(280, 6%, 10%);
+  --background-opaque: hsla(280, 6%, 10%, 0.8);
+
+  --text: hsl(280, 5%, 96%);
+  --opaque: hsl(280, 5%, 84%);
+
+  --accent: hsl(280, 100%, 70%);
+  --accent-opaque: hsla(280, 95%, 53%, 0.3);
+}
+
+body {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  height: 100dvh;
+  width: 100dvw;
+
+  overflow: hidden;
 }
 
 .container {
@@ -37,71 +90,61 @@
 
   transition: padding 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
 
-  background: url("/assets/images/background.jpg") no-repeat center 80% fixed;
+  background: url("/assets/images/wallpaper-orange.jpg") no-repeat center 80%
+    fixed;
   background-size: cover;
 }
 
-.container-alert {
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.85);
-
-  color: var(--background) !important;
-  font-weight: 500;
-  z-index: 20;
-
-  transition: all 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
-
-  /* user-select: text; */
+[data-theme="orange"] .container {
+  background: url("/assets/images/wallpaper-orange.jpg") no-repeat center 80%
+    fixed;
+  background-size: cover;
 }
 
-.container:has(.terminal .close:focus) .container-alert {
-  opacity: 1 !important;
-  transform: translate(-50%, -50%) scale(1);
-
-  transition-delay: 500ms;
+[data-theme="blue"] .container {
+  background: url("/assets/images/wallpaper-blue.jpeg") no-repeat center 80%
+    fixed;
+  background-size: cover;
 }
 
-.container:has(.terminal #minimize-window:checked) {
-  justify-content: end;
+[data-theme="green"] .container {
+  background: url("/assets/images/wallpaper-green.jpeg") no-repeat center 80%
+    fixed;
+  background-size: cover;
 }
 
-.terminal {
+[data-theme="purple"] .container {
+  background: url("/assets/images/wallpaper-purple.jpeg") no-repeat center 80%
+    fixed;
+  background-size: cover;
+}
+
+.resizable {
+  resize: both;
+  overflow: auto;
+}
+
+.window-app {
   position: absolute;
 
   background-color: var(--background-opaque);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+
   color: var(--text);
+
   font-family: "Roboto Mono", monospace;
   font-size: 14px;
-
-  display: flex;
-  flex-direction: column;
-
-  height: 80%;
-  max-height: 100%;
-  width: 80%;
-  max-width: 100%;
-
-  min-width: 380px;
-  min-height: 180px;
 
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 
   border-radius: var(--radius);
   border: 0px;
 
-  overflow: hidden;
-  resize: both;
+  max-height: 100%;
+  max-width: 100%;
 
-  padding: 1rem 1rem 0 1rem;
-
-  z-index: 30;
-
-  transition: all 0.25s cubic-bezier(0.075, 0.15, 0.165, 1);
+  z-index: 10;
 }
 
 .window-controls {
@@ -236,122 +279,8 @@
   opacity: 0.5;
 }
 
-.commands-view {
-  display: flex;
-  flex-direction: column;
-  /* gap: 0.5rem; */
-
-  height: 100%;
-  width: 100%;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.editable {
-  outline: none;
-  /* overflow-y: auto; */
-}
-
-.commands-view::-webkit-scrollbar {
-  background-color: var(--background);
-  width: 0.2rem;
-}
-
-.commands-view::-webkit-scrollbar-thumb {
-  background-color: var(--accent);
-
-  border-radius: 0.2rem;
-}
-
-.commands-list {
-  /* user-select: all !important; */
-}
-
-.command-row {
-  min-height: 1.8rem;
-  width: 100%;
-
-  font-size: 14px;
-
-  align-items: start;
-  word-break: keep-all;
-
-  outline: none;
-
-  color: var(--opaque);
-
-  user-select: all !important;
-}
-
-.command-item {
-  display: flex !important;
-}
-
-.user-command {
-  display: flex;
-}
-
-.blink-caret:nth-last-child(1) {
-  caret-color: transparent;
-}
-
-.blink-caret:nth-last-child(1)::after {
-  width: 0.4rem;
-  height: 1rem;
-
-  content: "";
-
-  background-color: var(--text);
-
-  animation: blink 1s steps(1) infinite;
-  padding-top: 1.5px;
-}
-
 .word-break {
   word-break: break-all !important;
-}
-
-@keyframes blink {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-  }
-}
-
-.user-command::before {
-  content: "arscslvt@web: $ ";
-  white-space: nowrap;
-  margin-right: 0.5rem;
-
-  color: var(--accent);
-
-  pointer-events: none;
-  user-select: none;
-}
-.system-command::before {
-  content: "web-terminal: ";
-  white-space: nowrap;
-  margin-right: 0.5rem;
-
-  color: var(--opaque);
-
-  pointer-events: none;
-  user-select: none;
-}
-
-.lirow input {
-  height: 100%;
-  width: 100%;
-
-  background-color: var(--background);
-  border: 0;
-  outline: 0;
-
-  color: var(--text);
 }
 
 @media screen and (max-width: 420px) {
@@ -360,16 +289,7 @@
     padding: 0;
   }
 
-  .terminal {
-    border-radius: 0;
-    font-size: 16px;
-  }
-
   #maximize-button {
     display: none;
-  }
-
-  .command-row {
-    font-size: 16px !important;
   }
 }

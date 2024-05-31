@@ -8,6 +8,7 @@ import {
 import { curl } from "../commands/fetcher.js";
 import logger from "./logger.js";
 import { cmd_cd, cmd_ls, cmd_mkdir } from "./file-system.js";
+import { cmd_changeTheme } from "../commands/theme.js";
 
 /**
  * @constant commands
@@ -56,6 +57,11 @@ const commands = {
     usage: "curl [url]",
     isAsync: true,
     fn: curl,
+  },
+  change_theme: {
+    description: "Change the theme of the terminal",
+    usage: "change_theme [theme]",
+    fn: cmd_changeTheme,
   },
 };
 

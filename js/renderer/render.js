@@ -16,6 +16,7 @@ const requestComponent = async (componentUrl, componentId) => {
       ).map((script) => script.src);
 
       return response.text().then((html) => {
+        console.log("Component ID: ", componentId);
         // regex for [componentId]
         html = html.replace(new RegExp(`\\[COMPONENT_ID\\]`, "g"), componentId);
 
@@ -175,15 +176,19 @@ const unmountComponent = async (componentId, componentUrl) => {
 
   const component = document.querySelector(`[componentid="${componentId}"]`);
 
-  console.log("Found component: ", component);
-
   if (component) {
+    console.log("Found component: ", component);
+
     const scripts = await getPageScripts(componentUrl).catch((error) => {
       console.error(
         "There has been a problem fetching component scripts: ",
         error
       );
     });
+
+    // add closing animation
+    component.classList.remove("window-app-animation");
+    component.classList.add("window-app-animation-close");
 
     try {
       scripts.forEach((script) => {
@@ -201,9 +206,11 @@ const unmountComponent = async (componentId, componentUrl) => {
       throw Error("Error deleting script");
     }
 
-    component.remove();
+    setTimeout(() => {
+      component.remove();
 
-    removeWindow(component);
+      removeWindow(component);
+    }, 250);
   }
 };
 
@@ -214,26 +221,47 @@ const renderComponent = async (componentUrl, targetElement) => {
 
   const component = await requestComponent(componentUrl, randomId);
 
-  const componentFirstElement = new DOMParser().parseFromString(
-    component,
-    "text/html"
-  ).body.firstChild;
+  const dom = new DOMParser().parseFromString(component, "text/html").body;
+
+  console.log("Component to render: ", dom.firstChild);
+
+  const componentFirstElement = dom.firstChild;
+
+  const appName = componentFirstElement.getAttribute("appname");
+  const appIconUrl = componentFirstElement.getAttribute("icon");
+  const isResizable = componentFirstElement.getAttribute("resizable");
+
+  console.log("App icon: ", appIconUrl);
 
   const element = document.createElement(componentFirstElement.tagName, {
     is: componentFirstElement.is,
   });
-  element.classList.add(componentFirstElement.classList);
+
+  const defaultClasses = [
+    componentFirstElement.className,
+    "window-app",
+    "window-app-animation",
+    isResizable ? "resizable" : "",
+  ];
+
+  element.className = defaultClasses.join(" ");
   element.id = componentFirstElement.id;
 
   // assign new attribute for componentId
   element.setAttribute("componentId", randomId);
+  element.setAttribute("appname", appName);
 
   element.innerHTML = componentFirstElement.innerHTML;
 
   console.log("Component to render: ", element);
   targetElement.appendChild(element);
 
-  addWindow(element);
+  addWindow(element, {
+    componentId: randomId,
+    componentUrl,
+    appIconUrl,
+    appName,
+  });
 };
 
 export { requestComponent, renderComponent, unmountComponent };

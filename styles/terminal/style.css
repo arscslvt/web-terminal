@@ -1,0 +1,179 @@
+.terminal {
+  font-family: "Roboto Mono", monospace;
+  font-size: 14px;
+
+  top: 30px;
+  left: 30px;
+
+  display: flex;
+  flex-direction: column;
+
+  height: 400px;
+  width: 650px;
+
+  min-width: 380px;
+  min-height: 180px;
+
+  padding: 1rem 1rem 0 1rem;
+
+  transition: all 0.25s cubic-bezier(0.075, 0.15, 0.165, 1);
+}
+
+.commands-view {
+  display: flex;
+  flex-direction: column;
+  /* gap: 0.5rem; */
+
+  height: 100%;
+  width: 100%;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.editable {
+  outline: none;
+  /* overflow-y: auto; */
+}
+
+.commands-view::-webkit-scrollbar {
+  background-color: var(--background);
+  width: 0.2rem;
+}
+
+.commands-view::-webkit-scrollbar-thumb {
+  background-color: var(--accent);
+
+  border-radius: 0.2rem;
+}
+
+.commands-list {
+  /* user-select: all !important; */
+}
+
+.command-row {
+  min-height: 1.8rem;
+  width: 100%;
+
+  font-size: 14px;
+
+  align-items: start;
+  word-break: keep-all;
+
+  outline: none;
+
+  color: var(--opaque);
+
+  user-select: all !important;
+}
+
+.command-item {
+  display: flex !important;
+}
+
+.user-command {
+  display: flex;
+}
+
+.blink-caret:nth-last-child(1) {
+  caret-color: transparent;
+}
+
+.blink-caret:nth-last-child(1)::after {
+  width: 0.4rem;
+  height: 1rem;
+
+  content: "";
+
+  background-color: var(--text);
+
+  animation: blink 1s steps(1) infinite;
+  padding-top: 1.5px;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+.user-command::before {
+  content: "arscslvt@web: $ ";
+  white-space: nowrap;
+  margin-right: 0.5rem;
+
+  color: var(--accent);
+
+  pointer-events: none;
+  user-select: none;
+}
+.system-command::before {
+  content: "web-terminal: ";
+  white-space: nowrap;
+  margin-right: 0.5rem;
+
+  color: var(--opaque);
+
+  pointer-events: none;
+  user-select: none;
+}
+
+.lirow input {
+  height: 100%;
+  width: 100%;
+
+  background-color: var(--background);
+  border: 0;
+  outline: 0;
+
+  color: var(--text);
+}
+
+.window-app-animation {
+  animation: open-app 0.25s cubic-bezier(0.075, 0.15, 0.165, 1);
+}
+
+.window-app-animation-close {
+  animation: close-app 0.25s cubic-bezier(0.075, 0.15, 0.165, 1) !important;
+
+  opacity: 0;
+}
+
+@keyframes open-app {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes close-app {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .terminal {
+    border-radius: 0;
+    font-size: 16px;
+  }
+
+  .command-row {
+    font-size: 16px !important;
+  }
+}

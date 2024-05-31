@@ -17,44 +17,49 @@ const windowControls = document.querySelector(
 
 // Handle dragging the window
 let isDragging = false;
-let initialX = 0;
-let initialY = 0;
 
-let boundindBox = {
+const boundindBox = document.querySelector("#container");
+
+const dragLimits = {
   top: 0,
+  right: boundindBox.clientWidth,
+  bottom: boundindBox.clientHeight,
   left: 0,
-  right: window.innerWidth,
-  bottom: window.innerHeight,
+};
+
+let initialX;
+let initialY;
+
+let offsetX = 0;
+let offsetY = 0;
+
+const handleMouseDown = (e) => {
+  isDragging = true;
+
+  initialX = e.clientX - offsetX;
+  initialY = e.clientY - offsetY;
 };
 
 const handleMouseMove = (e) => {
   if (!isDragging) return;
 
-  const currentX = e.clientX - initialX;
-  const currentY = e.clientY - initialY;
+  let currentX = e.clientX - initialX;
+  let currentY = e.clientY - initialY;
+
+  if (currentY < dragLimits.top) {
+    currentY = dragLimits.top;
+  }
+
+  if (currentY > dragLimits.bottom) {
+    currentY = dragLimits.bottom;
+  }
+
+  offsetX = currentX;
+  offsetY = currentY;
 
   const windowElement = document.querySelector("#terminal-[COMPONENT_ID]");
 
-  if (
-    currentX < boundindBox.left ||
-    currentX + windowElement.offsetWidth > boundindBox.right
-  )
-    return;
-
-  if (
-    currentY < boundindBox.top ||
-    currentY + windowElement.offsetHeight > boundindBox.bottom
-  )
-    return;
-
   windowElement.style.transform = `translate(${currentX}px, ${currentY}px)`;
-};
-
-const handleMouseDown = (e) => {
-  isDragging = true;
-
-  initialX = e.clientX;
-  initialY = e.clientY;
 };
 
 const handleMouseUp = () => {
