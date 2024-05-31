@@ -47,10 +47,6 @@
   border-radius: 0.2rem;
 }
 
-.commands-list {
-  /* user-select: all !important; */
-}
-
 .command-row {
   min-height: 1.8rem;
   width: 100%;

@@ -283,6 +283,17 @@ body {
   word-break: break-all !important;
 }
 
+.no-scrollbars {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  overflow: hidden;
+}
+
+.no-scrollbars::-webkit-scrollbar {
+  display: none;
+}
+
 @media screen and (max-width: 420px) {
   .container {
     flex-direction: column;

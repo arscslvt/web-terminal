@@ -240,6 +240,7 @@ const renderComponent = async (componentUrl, targetElement) => {
     componentFirstElement.className,
     "window-app",
     "window-app-animation",
+    "no-scrollbars",
     isResizable ? "resizable" : "",
   ];
 
