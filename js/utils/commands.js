@@ -70,11 +70,11 @@ const commands = {
  * @description Invokes a command with the given arguments
  *
  * @param {string} command The command to invoke
- * @param {any} args The arguments to pass to the command
+ * @param {any} options Any options to pass to the command
  *
  * @returns {string} The response from the command
  */
-const invokeCommand = async (command, args) => {
+const invokeCommand = async (command, options) => {
   const [providedCommandName, ...commandArgs] = command.trim().split(/\s+/, 10);
 
   const commandName = providedCommandName.toLocaleLowerCase();
@@ -94,8 +94,8 @@ const invokeCommand = async (command, args) => {
 
   if (commands[commandName].isAsync) {
     console.log("Fn is async");
-    response = await commands[commandName].fn(commandArgs);
-  } else response = commands[commandName].fn(commandArgs);
+    response = await commands[commandName].fn(commandArgs, options);
+  } else response = commands[commandName].fn(commandArgs, options);
 
   return response;
 };

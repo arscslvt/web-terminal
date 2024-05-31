@@ -40,8 +40,14 @@ const cmd_echo = (args) => {
   return args.join(" ");
 };
 
-const cmd_clear = (args) => {
-  const commandsList = document.querySelector("#commands-list");
+const cmd_clear = (args, options) => {
+  const commandsList = options?.commandsList;
+
+  if (!commandsList) {
+    console.error("No commands list found");
+
+    return "Error 500: Cannot clear the terminal without commands list.";
+  }
 
   commandsList.innerHTML = "";
   return "";

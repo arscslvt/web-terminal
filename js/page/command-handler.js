@@ -1,3 +1,5 @@
+import commands from "./js/utils/commands.js";
+
 const commandsList = document.querySelector("#commands-list-[COMPONENT_ID]");
 const commandInput = document.querySelector("#command-input-[COMPONENT_ID]");
 
@@ -62,6 +64,37 @@ commandInput.addEventListener("keydown", (e) => {
 
     return;
   }
+
+  if (e.key === "Tab") {
+    e.preventDefault();
+    const command = e.target.innerText.trim();
+    const [providedCommandName, ...commandArgs] = command
+      .trim()
+      .split(/\s+/, 10);
+
+    const commandName = providedCommandName.toLocaleLowerCase();
+
+    if (command.includes(" ")) return;
+
+    Object.keys(commands.commands).map((cmd) => {
+      if (cmd.startsWith(commandName)) {
+        commandInput.innerText = `${cmd} `;
+
+        const range = document.createRange();
+        const sel = window.getSelection();
+        range.setStart(
+          commandInput.childNodes[0],
+          commandInput.innerText.length
+        );
+
+        range.collapse(true);
+        sel.removeAllRanges();
+        sel.addRange(range);
+
+        return;
+      }
+    });
+  }
 });
 /**
  * @function handleAddCommand
@@ -110,7 +143,10 @@ commandInput.addEventListener("keypress", async (e) => {
     const command = e.target.innerText.trim();
     handleAddCommand(command);
 
-    const response = await window.invokeCommand(command);
+    const response = await window.invokeCommand(command, {
+      terminal: terminalHTML,
+      commandsList: commandsList,
+    });
 
     if (response) {
       handleAddCommand(response, "system");

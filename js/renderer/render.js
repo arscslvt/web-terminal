@@ -192,12 +192,11 @@ const unmountComponent = async (componentId, componentUrl) => {
 
     try {
       scripts.forEach((script) => {
-        const scriptElement = document.getElementById(
-          `componentscript-${script.src}`
+        const scriptElement = document.querySelector(
+          `script[script-from="component-${componentId}"]`
         );
 
         if (scriptElement) {
-          console.log("Deleting script: ", scriptElement.src);
           scriptElement.remove();
         }
       });
