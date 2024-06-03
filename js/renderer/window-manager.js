@@ -29,3 +29,16 @@ const handleMaximized = () => {
 maximizeBtn.addEventListener("click", handleMaximized);
 
 windowControls.addEventListener("dblclick", handleMaximized);
+
+// move to top of container div on focus
+appElement.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+
+  const container = document.getElementById("container");
+
+  if (container.lastChild === appElement) return;
+
+  appElement.classList.remove("window-app-animation");
+  container.appendChild(appElement);
+});
