@@ -123,7 +123,8 @@ const handleAddCommand = (command, type = "user") => {
   switch (type) {
     case "user":
       commandRow.classList.add("user-command");
-      prompt.innerText = `${config.user}@localhost:~$`;
+      // prompt.innerText = `${config.user}@localhost:~$`;
+      prompt.innerText = `root@localhost:~$`;
       break;
     case "system":
       commandRow.classList.add("system-command");
@@ -155,6 +156,11 @@ const handleAddCommand = (command, type = "user") => {
 commandInput.addEventListener("keypress", async (e) => {
   if (e.key === "Enter") {
     const command = e.target.innerText.trim();
+
+    if (!command) {
+      return handleAddCommand(command, "user");
+    }
+
     handleAddCommand(command);
 
     const response = await window.invokeCommand(command, {
