@@ -5,6 +5,10 @@ const closeTerminal = () => {
   unmountComponent("[COMPONENT_ID]", "/terminal.html");
 };
 
+const windowControls = document.querySelector(
+  "#window-controls-[COMPONENT_ID]"
+);
+
 const appElement = document.getElementById("app-[COMPONENT_ID]");
 
 const closeBtn = document.getElementById("win-close-btn-[COMPONENT_ID]");
@@ -18,6 +22,10 @@ minimizeBtn.addEventListener("click", () => {
   appElement.classList.add("minimized");
 });
 
-maximizeBtn.addEventListener("click", () => {
+const handleMaximized = () => {
   appElement.classList.toggle("maximized");
-});
+};
+
+maximizeBtn.addEventListener("click", handleMaximized);
+
+windowControls.addEventListener("dblclick", handleMaximized);

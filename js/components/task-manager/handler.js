@@ -2,10 +2,33 @@ import { openWindows } from "./js/page/window.js";
 import { renderComponent } from "./js/renderer/render.js";
 
 const toolbarButtonContainer = document.querySelector(
-  "#task-manager-toolbar-[COMPONENT_ID]"
+  "#task-manager-toolbar-[COMPONENT_ID] .opened-apps"
+);
+const toolbarFixedContainer = document.querySelector(
+  "#task-manager-toolbar-[COMPONENT_ID] .fixed-apps"
 );
 
-const buildTaskManager = (app) => {
+// const fixedApps = document.querySelectorAll(".fixed-apps fixed-app");
+
+// ("Fixed apps: ", fixedApps);
+
+// fixedApps.forEach((app, i) => {
+//   ("Fixed app: ", app);
+//   app.addEventListener("click", () => {
+//     ("Opening app: ", app);
+
+//     const appUrl = app?.dataset?.appUrl;
+
+//     if (!appUrl) {
+//       console.error("Component URL is required");
+//       return;
+//     }
+
+//     renderComponent(appUrl, document.querySelector("#container"));
+//   });
+// });
+
+const buildTaskManager = (app, where = toolbarButtonContainer) => {
   const button = document.createElement("button");
   button.classList.add("task-manager-app");
 
@@ -50,19 +73,21 @@ const buildTaskManager = (app) => {
 
     "Opening app: ", appUrl;
 
-    renderComponent(appUrl, document.querySelector("#container"));
+    renderComponent(appUrl, document.querySelector("#container"), app.id);
   });
 
-  toolbarButtonContainer.appendChild(button);
+  where.appendChild(button);
 };
 
 $(document).on("arrayChanged", (e, prop, value) => {
-  console.log("Task Manager Array changed: ", prop, value);
+  "Task Manager Array changed: ", prop, value;
+
+  toolbarButtonContainer.innerHTML = "";
 
   // listener on openWindows
-  // openWindows.map((app, i) => {
-  //   buildTaskManager(app);
-  // });
+  openWindows.map((app, i) => {
+    buildTaskManager(app);
+  });
 });
 
 openWindows.map((app, i) => {

@@ -3,7 +3,12 @@
  * @returns {Promise<HTMLElement>}
  */
 
-import { addWindow, removeWindow } from "../page/window.js";
+import {
+  addWindow,
+  removeWindow,
+  openWindows,
+  openWindowsProxy,
+} from "../page/window.js";
 
 const requestComponent = async (componentUrl, componentId) => {
   const componentHTML = fetch(`components/${componentUrl}`)
@@ -215,7 +220,29 @@ const unmountComponent = async (componentId, componentUrl) => {
 
 window.unmountComponent = unmountComponent;
 
-const renderComponent = async (componentUrl, targetElement) => {
+const renderComponent = async (
+  componentUrl,
+  targetElement,
+  componentId,
+  skipAddWindow = false
+) => {
+  if (componentId) {
+    "Component ID: ", componentId;
+    "Open windows: ", openWindowsProxy;
+    const found = openWindowsProxy.find((window) => window.id === componentId);
+
+    "Found window: ", found;
+
+    if (found) {
+      const component = document.querySelector(`#app-${componentId}`);
+
+      if (component) {
+        component.classList.remove("minimized");
+        return;
+      }
+    }
+  }
+
   const randomId = Math.random().toString(36).substring(7);
 
   const component = await requestComponent(componentUrl, randomId);
@@ -256,12 +283,15 @@ const renderComponent = async (componentUrl, targetElement) => {
   "Component to render: ", element;
   targetElement.appendChild(element);
 
-  addWindow(element, {
-    componentId: randomId,
-    componentUrl,
-    appIconUrl,
-    appName,
-  });
+  if (!skipAddWindow)
+    addWindow(element, {
+      componentId: randomId,
+      componentUrl,
+      appIconUrl,
+      appName,
+    });
 };
+
+window.renderComponent = renderComponent;
 
 export { requestComponent, renderComponent, unmountComponent };

@@ -4,10 +4,8 @@ const openWindowsProxy = [];
 
 let openWindowsHandler = {
   set: function (target, prop, value) {
-    if (prop === "length") {
-      $(document).trigger("arrayChanged", [prop, value]);
-      console.log("Array changed: ", prop, value);
-    }
+    $(document).trigger("arrayChanged", [prop, value]);
+    "Array changed: ", prop, value;
     target[prop] = value;
     return true;
   },
@@ -32,6 +30,11 @@ const addWindow = (
   windowElement,
   { componentId, componentUrl, appIconUrl, appName }
 ) => {
+  if (openWindows.length >= 7) {
+    alert("You can only open 7 windows at a time.");
+    return;
+  }
+
   if (systemWindows.includes(componentUrl.match(/[^/]+$/)[0])) return;
 
   const windowObj = {
@@ -105,4 +108,4 @@ document.addEventListener("DOMContentLoaded", () => {
   renderInitialComponents();
 });
 
-export { addWindow, removeWindow, editWindow, openWindows };
+export { addWindow, removeWindow, editWindow, openWindows, openWindowsProxy };

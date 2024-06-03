@@ -3,9 +3,24 @@
   id="task-manager-toolbar-[COMPONENT_ID]"
   appname="Task Manager"
 >
-  <!-- <button class="task-manager-icon">
-      <img src="/assets/svg/icons/bash.svg" alt="Bash Icon" />
-    </button> -->
+  <div class="task-manager-view">
+    <div class="fixed-apps">
+      <button
+        class="task-manager-app"
+        onclick="renderComponent('terminal.html', document.querySelector('#container'))"
+      >
+        <img
+          src="assets/app/icons/bash.svg"
+          class="task-manager-icon fixed-app"
+          alt="Bash Icon"
+          data-appurl="terminal.html"
+        />
+      </button>
+    </div>
+
+    <div class="separator"></div>
+    <div class="opened-apps"></div>
+  </div>
 </div>
 
 <link rel="stylesheet" href="/styles/task-manager/style.css" />

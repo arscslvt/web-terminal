@@ -153,6 +153,9 @@ body {
   max-height: 100%;
   max-width: 100%;
 
+  display: flex;
+  flex-direction: column;
+
   z-index: 10;
 }
 
@@ -161,6 +164,8 @@ body {
   justify-content: space-between;
   gap: 0.5rem;
 
+  padding: 1rem 1rem 0 1rem;
+
   width: 100%;
 }
 
@@ -168,6 +173,16 @@ body {
   display: flex;
   gap: 0.4rem;
   padding-bottom: 1rem;
+}
+
+.window-viewport {
+  padding: 0rem 1rem 0.5rem 1rem;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
 }
 
 .button-checkbox {
