@@ -97,8 +97,7 @@
   }
 }
 
-.user-command::before {
-  content: "arscslvt@web: $ ";
+.command-prompt {
   white-space: nowrap;
   margin-right: 0.5rem;
 
@@ -107,8 +106,18 @@
   pointer-events: none;
   user-select: none;
 }
+
+.user-command .command-prompt-text {
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.system-command .command-prompt-text {
+  color: var(--text);
+  white-space: nowrap;
+}
+
 .system-command::before {
-  content: "web-terminal: ";
   white-space: nowrap;
   margin-right: 0.5rem;
 

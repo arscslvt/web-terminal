@@ -1,26 +1,20 @@
 <div
   class="terminal"
-  id="terminal-[COMPONENT_ID]"
+  id="app-[COMPONENT_ID]"
   appname="Terminal"
   icon="bash.svg"
   resizable="true"
 >
   <div class="window-controls" id="window-controls-[COMPONENT_ID]">
     <div class="window-buttons">
-      <button class="button close" id="close-terminal-[COMPONENT_ID]">
+      <button class="button close" id="win-close-btn-[COMPONENT_ID]">
         <img src="assets/icons/controls/win-close.png" alt="Close window" />
       </button>
       <div
         role="button"
         class="button-checkbox"
-        id="minimize-terminal-[COMPONENT_ID]"
+        id="win-minimize-btn-[COMPONENT_ID]"
       >
-        <input
-          type="checkbox"
-          class="minimize-cb"
-          name="minimize-window"
-          id="minimize-window-[COMPONENT_ID]"
-        />
         <img
           src="assets/icons/controls/win-minimize.png"
           alt="Minimize window"
@@ -29,14 +23,8 @@
       <div
         role="button"
         class="button-checkbox"
-        id="maximize-terminal-[COMPONENT_ID]"
+        id="win-maximize-btn-[COMPONENT_ID]"
       >
-        <input
-          type="checkbox"
-          class="maximize-cb"
-          name="maximize-window"
-          id="maximize-window-[COMPONENT_ID]"
-        />
         <img src="assets/icons/controls/win-full.png" alt="Maximize window" />
       </div>
     </div>
@@ -59,11 +47,16 @@
     <div class="editable" id="commands-list-[COMPONENT_ID]">
       <!-- <div class="command-row command-item blink-caret"></div> -->
     </div>
-    <div
-      class="command-row user-command"
-      id="command-input-[COMPONENT_ID]"
-      contenteditable="true"
-    ></div>
+    <div class="command command-row user-command">
+      <div class="command-prompt">
+        <span class="command-prompt-text">user@localhost~$</span>
+      </div>
+      <div
+        class="command-row user-command"
+        id="command-input-[COMPONENT_ID]"
+        contenteditable="true"
+      ></div>
+    </div>
   </div>
 </div>
 
@@ -77,4 +70,9 @@
   src="../js/components/terminal/handler.js"
   defer
   title="terminal window handler"
+></script>
+<script
+  src="../js/renderer/window-manager.js"
+  defer
+  title="window manager"
 ></script>

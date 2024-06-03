@@ -45,12 +45,12 @@ function logger(msg, type) {
       const callerInfo = callerLine.match(/\((.*?):(\d+):(\d+)\)/);
       if (callerInfo) {
         const [_, file, line, col] = callerInfo;
-        console.log(`[${sym}] ${msg}\n → \t${file}:${line}:${col})`);
+        `[${sym}] ${msg}\n → \t${file}:${line}:${col})`;
       } else {
-        console.log(`[${sym}] ${msg}\n → \t(Caller info not found)`);
+        `[${sym}] ${msg}\n → \t(Caller info not found)`;
       }
     } else {
-      console.log(`[${sym}] ${msg}`);
+      `[${sym}] ${msg}`;
     }
   }
 }

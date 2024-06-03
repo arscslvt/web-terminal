@@ -15,9 +15,9 @@ const cmd_help = (args) => {
 
   // print in asc mode
   args.map((cmd) => {
-    console.log("HELP CMD: ", cmd);
+    "HELP CMD: ", cmd;
     if (commands.commands[cmd]) {
-      console.log("HELP CMD found: ", cmd);
+      "HELP CMD found: ", cmd;
       const print = `${cmd} - ${commands.commands[cmd].description} <span class="muted">(usage: ${commands.commands[cmd].usage})</span>`;
 
       if (help_list.includes(print)) return;
@@ -57,7 +57,7 @@ const cmd_sudo = (args) => {
   const command = args[0];
   const t_args = args.slice(1);
 
-  console.log(args);
+  args;
 
   if (t_args.length <= 0) return commands.commands["sudo"].usage;
 

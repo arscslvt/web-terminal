@@ -10,11 +10,6 @@ let current_command = 0;
 
 commandInput.focus();
 
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("Terminal is ready");
-  commandInput.focus();
-});
-
 commandInput.addEventListener("blur", () => {
   commandInput.classList.remove("blink-caret");
 });
@@ -104,28 +99,47 @@ commandInput.addEventListener("keydown", (e) => {
  * @param {string} type The type of command to add (user or system)
  */
 const handleAddCommand = (command, type = "user") => {
+  const config = {
+    user: window?.terminal?.user || "user",
+  };
+
   const commandRow = document.createElement("div");
   commandRow.classList.add(
-    "command-row",
+    "command",
     "command-item",
     type === "user" ? "user-command" : "system-command"
   );
 
+  const prompt_container = document.createElement("div");
+  prompt_container.classList.add("command-prompt");
+
+  const prompt = document.createElement("span");
+  prompt.classList.add("command-prompt-text");
+
+  const commandText = document.createElement("span");
+  commandText.classList.add("command-text");
+  commandText.innerText = command;
+
   switch (type) {
     case "user":
       commandRow.classList.add("user-command");
-      commandRow.innerText = command;
+      prompt.innerText = `${config.user}@localhost:~$`;
       break;
     case "system":
       commandRow.classList.add("system-command");
-      commandRow.innerHTML = `<div>${command}</div>`;
+      commandText.innerHTML = `<div>${command}</div>`;
+      prompt.innerText = "web-bash: ";
       break;
 
     default:
       commandRow.classList.add("user-command");
-      commandRow.innerText = command;
+      commandText.innerText = command;
       break;
   }
+
+  prompt_container.appendChild(prompt);
+  commandRow.appendChild(prompt_container);
+  commandRow.appendChild(commandText);
 
   commandsList.appendChild(commandRow);
 

@@ -5,12 +5,11 @@ const toolbarButtonContainer = document.querySelector(
   "#task-manager-toolbar-[COMPONENT_ID]"
 );
 
-// listener on openWindows
-openWindows.forEach((app) => {
+const buildTaskManager = (app) => {
   const button = document.createElement("button");
   button.classList.add("task-manager-app");
 
-  console.log("Button: ", app);
+  "Button: ", app;
 
   const icon = document.createElement("img");
 
@@ -33,6 +32,14 @@ openWindows.forEach((app) => {
   button.appendChild(icon);
   button.appendChild(text);
 
+  const isMinimized = app.options.minimized;
+
+  if (isMinimized) {
+    ("App minimized");
+    app.element;
+    app.element.classList.toggle("minimized");
+  }
+
   button.addEventListener("click", () => {
     const appUrl = app?.options?.componentUrl;
 
@@ -41,10 +48,23 @@ openWindows.forEach((app) => {
       return;
     }
 
-    console.log("Opening app: ", appUrl);
+    "Opening app: ", appUrl;
 
     renderComponent(appUrl, document.querySelector("#container"));
   });
 
   toolbarButtonContainer.appendChild(button);
+};
+
+$(document).on("arrayChanged", (e, prop, value) => {
+  console.log("Task Manager Array changed: ", prop, value);
+
+  // listener on openWindows
+  // openWindows.map((app, i) => {
+  //   buildTaskManager(app);
+  // });
+});
+
+openWindows.map((app, i) => {
+  buildTaskManager(app);
 });

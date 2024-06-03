@@ -16,7 +16,7 @@ const requestComponent = async (componentUrl, componentId) => {
       ).map((script) => script.src);
 
       return response.text().then((html) => {
-        console.log("Component ID: ", componentId);
+        "Component ID: ", componentId;
         // regex for [componentId]
         html = html.replace(new RegExp(`\\[COMPONENT_ID\\]`, "g"), componentId);
 
@@ -177,7 +177,7 @@ const unmountComponent = async (componentId, componentUrl) => {
   const component = document.querySelector(`[componentid="${componentId}"]`);
 
   if (component) {
-    console.log("Found component: ", component);
+    "Found component: ", component;
 
     const scripts = await getPageScripts(componentUrl).catch((error) => {
       console.error(
@@ -222,7 +222,7 @@ const renderComponent = async (componentUrl, targetElement) => {
 
   const dom = new DOMParser().parseFromString(component, "text/html").body;
 
-  console.log("Component to render: ", dom.firstChild);
+  "Component to render: ", dom.firstChild;
 
   const componentFirstElement = dom.firstChild;
 
@@ -230,7 +230,7 @@ const renderComponent = async (componentUrl, targetElement) => {
   const appIconUrl = componentFirstElement.getAttribute("icon");
   const isResizable = componentFirstElement.getAttribute("resizable");
 
-  console.log("App icon: ", appIconUrl);
+  "App icon: ", appIconUrl;
 
   const element = document.createElement(componentFirstElement.tagName, {
     is: componentFirstElement.is,
@@ -253,7 +253,7 @@ const renderComponent = async (componentUrl, targetElement) => {
 
   element.innerHTML = componentFirstElement.innerHTML;
 
-  console.log("Component to render: ", element);
+  "Component to render: ", element;
   targetElement.appendChild(element);
 
   addWindow(element, {

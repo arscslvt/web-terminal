@@ -1,7 +1,19 @@
 import { renderComponent } from "../renderer/render.js";
 
-const openWindows = [];
-window.openWindows = openWindows;
+const openWindowsProxy = [];
+
+let openWindowsHandler = {
+  set: function (target, prop, value) {
+    if (prop === "length") {
+      $(document).trigger("arrayChanged", [prop, value]);
+      console.log("Array changed: ", prop, value);
+    }
+    target[prop] = value;
+    return true;
+  },
+};
+
+const openWindows = new Proxy(openWindowsProxy, openWindowsHandler);
 
 let activeWindow = null;
 
@@ -35,7 +47,7 @@ const addWindow = (
   openWindows.push(windowObj);
   activeWindow = openWindows[openWindows.length - 1];
 
-  console.log("Open windows: ", openWindows);
+  "Open windows: ", openWindows;
 };
 
 /**
@@ -53,7 +65,27 @@ const removeWindow = (windowElement) => {
     activeWindow = openWindows[openWindows.length - 1];
   }
 
-  console.log("Open windows: ", openWindows);
+  "Open windows: ", openWindows;
+};
+
+/**
+ * Edit a window's settings
+ * @param {HTMLElement} windowElement - The window to edit
+ * @param {object} options - The options object
+ * @returns {void}
+ */
+const editWindow = (windowElement, options) => {
+  "Editing window: ", windowElement;
+  const index = openWindows.findIndex(
+    (windowObj) => windowObj.element === windowElement
+  );
+
+  if (index > -1) {
+    const oldOptions = openWindows[index].options;
+    openWindows[index].options = { ...oldOptions, ...options };
+  }
+
+  "New window settings: ", openWindows;
 };
 
 const renderInitialComponents = async () => {
@@ -73,4 +105,4 @@ document.addEventListener("DOMContentLoaded", () => {
   renderInitialComponents();
 });
 
-export { addWindow, removeWindow, openWindows };
+export { addWindow, removeWindow, editWindow, openWindows };

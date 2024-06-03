@@ -1,11 +1,16 @@
+* {
+  --task-manager-viewport-height: 3rem;
+  --task-manager-bottom-margin: 12px;
+}
+
 .task-manager-viewport {
   position: fixed;
 
-  bottom: 12px;
+  bottom: var(--task-manager-bottom-margin);
   left: 0;
 
   width: 100dvw;
-  height: 3rem;
+  height: var(--task-manager-viewport-height);
 
   padding: 0px 1rem 0.2rem;
 

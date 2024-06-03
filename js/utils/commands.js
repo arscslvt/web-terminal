@@ -93,7 +93,7 @@ const invokeCommand = async (command, options) => {
   let response;
 
   if (commands[commandName].isAsync) {
-    console.log("Fn is async");
+    ("Fn is async");
     response = await commands[commandName].fn(commandArgs, options);
   } else response = commands[commandName].fn(commandArgs, options);
 

@@ -3,14 +3,6 @@ import { unmountComponent } from "./js/renderer/render.js";
 
 const lastSession = localStorage.getItem("lastSession");
 
-const closeButton = document.querySelector("#close-terminal-[COMPONENT_ID]");
-const minimizeButton = document.querySelector(
-  "#minimize-terminal-[COMPONENT_ID]"
-);
-const maximizeButton = document.querySelector(
-  "#maximize-terminal-[COMPONENT_ID]"
-);
-
 const windowControls = document.querySelector(
   "#window-controls-[COMPONENT_ID]"
 );
@@ -57,7 +49,7 @@ const handleMouseMove = (e) => {
   offsetX = currentX;
   offsetY = currentY;
 
-  const windowElement = document.querySelector("#terminal-[COMPONENT_ID]");
+  const windowElement = document.querySelector("#app-[COMPONENT_ID]");
 
   windowElement.style.transform = `translate(${currentX}px, ${currentY}px)`;
 };
@@ -69,13 +61,6 @@ const handleMouseUp = () => {
 windowControls.addEventListener("mousedown", handleMouseDown);
 document.addEventListener("mousemove", handleMouseMove);
 document.addEventListener("mouseup", handleMouseUp);
-
-const closeTerminal = () => {
-  console.log("Closing terminal");
-  unmountComponent("[COMPONENT_ID]", "/terminal.html");
-};
-
-closeButton.addEventListener("click", closeTerminal);
 
 const updateTime = () => {
   const timeHTML = document.querySelectorAll(".display-time");
@@ -99,7 +84,7 @@ const updateTime = () => {
 localStorage.setItem("lastSession", new Date().getTime());
 
 const refreshTime = setInterval(() => {
-  const isTerminalRendered = document.querySelector("#terminal-[COMPONENT_ID]");
+  const isTerminalRendered = document.querySelector("#app-[COMPONENT_ID]");
 
   if (!isTerminalRendered) {
     clearInterval(refreshTime);
